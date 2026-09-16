@@ -1,26 +1,150 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette — Navy & Emerald untuk pemerintahan modern */
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bbcadc;
+  --color-navy-300: #8fa3bf;
+  --color-navy-400: #5b7596;
+  --color-navy-500: #3d5170;
+  --color-navy-600: #2c3e5e;
+  --color-navy-700: #1e2d4a;
+  --color-navy-800: #162039;
+  --color-navy-900: #0f1729;
+
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+
+  --color-primary: #1e2d4a;
+  --color-primary-light: #f0f4f8;
+  --color-accent: #059669;
+  --color-accent-light: #ecfdf5;
+
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+
+  --color-foreground: #0f1729;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+
+  --color-success: #059669;
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+  --color-info: #2563eb;
+
+  --color-shadow: 0 1px 3px rgba(15, 23, 41, 0.08);
+  --color-shadow-md: 0 4px 12px rgba(15, 23, 41, 0.06);
+  --color-shadow-lg: 0 8px 24px rgba(15, 23, 41, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ========================================
+   BASE
+======================================== */
+
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-background);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ========================================
+   LAYOUT — MOBILE FIRST
+======================================== */
+
+/* Mobile/Tablet: sidebar hidden, bottom nav visible */
+.app-sidebar {
+  display: none;
+}
+
+.app-bottom-nav {
+  display: flex;
+}
+
+/* Desktop: sidebar visible, bottom nav hidden */
+@media (min-width: 1024px) {
+  .app-sidebar {
+    display: flex;
+  }
+
+  .app-bottom-nav {
+    display: none;
+  }
+
+  .app-layout {
+    grid-template-columns: 256px minmax(0, 1fr);
+  }
+}
+
+/* Smooth transitions */
+.nav-item-active {
+  position: relative;
+}
+
+.nav-item-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 3px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
